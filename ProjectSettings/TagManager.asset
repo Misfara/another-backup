@@ -33,6 +33,7 @@ TagManager:
   - Enemy4
   - EnemyThreshold4
   - NPC non-quest
+  - NPCNonQuest
   layers:
   - Default
   - TransparentFX

@@ -41,31 +41,29 @@ public class PlayerInteraction : MonoBehaviour
     {
         float interactRange = 0.25f;
         Collider2D collider = Physics2D.OverlapCircle(transform.position,interactRange);
-        if(collider != null && Input.GetKeyDown(KeyCode.E) )
+        if (collider != null && Input.GetKeyDown(KeyCode.E))
         {
-            if(collider.TryGetComponent(out NPCInteractable npcInteractable))
+            if (collider.CompareTag("NPC"))
             {
-        
-                npcInteractable.Update();
-                PlayDialog();
-                animator.SetFloat("UpDown",0f);
-                animator.SetFloat("RightLeft",0f);
-                rb.velocity = new Vector2 (0,0).normalized;
-                agentMover.dashLocked = true;
-          
-            }
-            else  if(agentMover.isDashing ==true)
-            {
-                collider = null;
-                interactRange = 0f;
+                if (collider.TryGetComponent(out NPCInteractable npcInteractable))
+                {
+                    npcInteractable.Update();
+                    PlayDialog();
+                    animator.SetFloat("UpDown", 0f);
+                    animator.SetFloat("RightLeft", 0f);
+                    rb.velocity = Vector2.zero;
+                    agentMover.dashLocked = true;
+                }
             }
         }
-        if(collider != null && Input.GetKeyDown(KeyCode.Q)&& nPCInteractable.isTyping ==  false)
+
+        if (collider != null && Input.GetKeyDown(KeyCode.Q) && collider.CompareTag("NPC"))
         {
-        
-            StartCoroutine(JustWait());
-        
-            agentMover.dashLocked = false;
+            if (nPCInteractable != null && !nPCInteractable.isTyping)
+            {
+                StartCoroutine(JustWait());
+                agentMover.dashLocked = false;
+            }
         }
     }
 

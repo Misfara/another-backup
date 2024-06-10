@@ -1,93 +1,75 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.InputSystem;
-using System;
+using UnityEngine.Events;
 
 public class NonQuestNPC : MonoBehaviour
 {
-    
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
+    public string[] dialogue;
 
-    
     [SerializeField] Transform Player;
     [SerializeField] Transform thisNPC;
-    PlayerInteraction playerInteraction;
-    AgentMover agentMover;
-    public string[] dialogue;
+
+    private PlayerInteraction playerInteraction;
+    private AgentMover agentMover;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private Animator playerAnimator;
+    private PlayerExperience playerExperience;
+
     private int index = 0;
+    private Color defaultColor;
+    private bool playerIsClose;
+    private bool canPress = false;
+    private bool isTyping = false;
 
     public float wordSpeed;
-    public bool playerIsClose;
+    public float delay = 0.25f;
 
-    Color defaultColor;
-   SpriteRenderer spriteRenderer;
-
-   Animator animator;
-   public float delay = 0.25f;
-
-
-    public bool canPress = false; 
-   public bool isTyping = false;
-
-   PlayerExperience playerExperience;
-
+    public UnityEvent OnBegin, OnDone;
 
     void Start()
     {
         dialogueText.text = "";
-        agentMover= GetComponent<AgentMover>();
+        agentMover = GameObject.FindGameObjectWithTag("Player").GetComponent<AgentMover>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
         animator = GetComponent<Animator>();
-         playerExperience = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerExperience>();
-          playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
+        playerExperience = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerExperience>();
+        playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
+        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
 
-      
+    void Update()
+    {
+        Dialog();
+    }
 
-    
-
-    // Update is called once per frame
-    public void Update()
+    public void Dialog()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
         {
-            if (!dialoguePanel.activeInHierarchy )
+            if (!dialoguePanel.activeInHierarchy)
             {
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
-           
-                
-
-                
+                OnDialog();
             }
             else if (dialogueText.text == dialogue[index])
             {
                 NextLine();
-             
             }
-
-           
         }
-        if (!isTyping){
-        if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy )
+
+        // Ensure Q key only works if not typing
+        if (Input.GetKeyDown(KeyCode.Q) && playerIsClose )
         {
+            StopAllCoroutines();
             StartCoroutine(JustWait());
-         
         }
-
-         
-        }
-
-       
-
-        
-
-        
     }
 
     public void RemoveText()
@@ -99,38 +81,28 @@ public class NonQuestNPC : MonoBehaviour
 
     IEnumerator Typing()
     {
-        isTyping = true; 
-        foreach(char letter in dialogue[index].ToCharArray())
+        isTyping = true; // Set isTyping to true when starting to type
+        dialogueText.text = ""; // Clear the text before starting to type
+        foreach (char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
             canPress = true;
-        
         }
-         isTyping = false;
+        isTyping = false; // Set isTyping to false after typing is complete
     }
 
-    public IEnumerator JustWait()
-    {
-          if(canPress == true) 
-           yield return new WaitForSeconds(delay);
-            RemoveText();
-    }
-
- 
     public void NextLine()
     {
         if (index < dialogue.Length - 1)
         {
             index++;
-            dialogueText.text = "";
             StartCoroutine(Typing());
-            canPress = true;
-            
         }
         else
         {
             RemoveText();
+            DoneDialog();
         }
     }
 
@@ -139,27 +111,24 @@ public class NonQuestNPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = true;
-            spriteRenderer.color = new Color(1f, 1f,1f);
+            spriteRenderer.color = new Color(1f, 1f, 1f);
             animator.speed = 0.5f;
         }
-
-          
- 
     }
 
-    private void OnTriggerStay2D(Collider2D other){
-        if (other.CompareTag("Player")){
-                if(Player.position.x  > thisNPC.position.x ){
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (Player.position.x > thisNPC.position.x)
+            {
                 spriteRenderer.flipX = false;
-             }
-                if(Player.position.x  < thisNPC.position.x ){
-                spriteRenderer.flipX = enabled;
-             }
+            }
+            else if (Player.position.x < thisNPC.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
-
-      
-
-        
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -167,16 +136,29 @@ public class NonQuestNPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = false;
-            
             spriteRenderer.color = defaultColor;
             animator.speed = 1f;
         }
     }
 
-     
+    public void OnDialog()
+    {
+        playerAnimator.SetFloat("UpDown", 0f);
+        playerAnimator.SetFloat("RightLeft", 0f);
+        agentMover.acceleration = 0;
+        OnBegin?.Invoke();
     }
 
+    public void DoneDialog()
+    {
+        agentMover.acceleration = 50;
+        OnDone?.Invoke();
+    }
 
-
-   
-    
+    public IEnumerator JustWait()
+    {
+        yield return new WaitForSeconds(delay);
+        DoneDialog();
+      
+    }
+}
