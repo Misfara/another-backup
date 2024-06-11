@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerExperience : MonoBehaviour
+public class PlayerExperience : MonoBehaviour, IDataPersistence
 {
     Agent agent;
     Health health;
@@ -98,5 +98,20 @@ public class PlayerExperience : MonoBehaviour
         }
         canvasGroup.alpha = 0;
         levelUpPanel.SetActive(false);
+    }
+
+   //Connect to GameData and Data Persistence for saved game health 
+    public void LoadData(GameData data)
+    {
+        this.currentXP = data.currentXP; 
+        this.damageValue = data.damageValue;
+        this.currentLevel = data.currentLevel;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.currentXP = this. currentXP;
+        data.damageValue = this.damageValue;
+        data.currentLevel = this.currentLevel;
     }
 }

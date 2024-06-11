@@ -6,11 +6,14 @@ using UnityEngine.UI;
 [System.Serializable]
 public class GameData
 {
+    public long lastUpdated;
     public int currentHealth;
     public int currentXP;
     public int damageValue;
     public int currentLevel;
-    public bool itemQuestTaken; 
+    public int i;
+    public SerializableDictionary<string, bool> questFinished; 
+    // public SerializableDictionary<string, bool> isFull;
 
     public Vector3 playerPosition;
     // public SerializableDictionary<string, bool> itemButton;
@@ -25,7 +28,9 @@ public class GameData
         this.currentXP = 0;
         this.damageValue = 1;
         this.currentLevel = 1;
-        this.itemQuestTaken = false;
+        this.i = 0;
+        questFinished = new SerializableDictionary<string, bool>();
+        // isFull = new SerializableDictionary<string, bool>();
         playerPosition = Vector3.zero;
         // itemButton = new SerializableDictionary<string, bool>();
         this.textBox = "";

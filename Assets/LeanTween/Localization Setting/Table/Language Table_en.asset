@@ -74,6 +74,22 @@ MonoBehaviour:
     m_Localized: Please Wait...
     m_Metadata:
       m_Items: []
+  - m_Id: 8842539625725952
+    m_Localized: Empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8846116599480320
+    m_Localized: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8859960180850688
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8860034659106816
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

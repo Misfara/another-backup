@@ -74,6 +74,22 @@ MonoBehaviour:
     m_Localized: Mohon Tunggu...
     m_Metadata:
       m_Items: []
+  - m_Id: 8842539625725952
+    m_Localized: Kosong
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8846116599480320
+    m_Localized: Hapus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8859960180850688
+    m_Localized: Ya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8860034659106816
+    m_Localized: Batal
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

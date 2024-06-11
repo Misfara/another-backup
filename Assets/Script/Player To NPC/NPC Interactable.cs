@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System;
 
-public class NPCInteractable : MonoBehaviour, IDataPersistence
+public class NPCInteractable : MonoBehaviour//, IDataPersistence
 {
     
     public GameObject dialoguePanel;
@@ -51,15 +51,15 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
           playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
     }
 
-      public void LoadData(GameData data)
-    {
-        this.itemQuestTaken = data.itemQuestTaken;
-    }
+    //   public void LoadData(GameData data)
+    // {
+    //     this.questFinished = data.questFinished;
+    // }
 
-    public void SaveData(ref GameData data)
-    {
-        data.itemQuestTaken = this. itemQuestTaken;
-    }
+    // public void SaveData(GameData data)
+    // {
+    //     data.questFinished = this. questFinished;
+    // }
 
     // Update is called once per frame
     public void Update()

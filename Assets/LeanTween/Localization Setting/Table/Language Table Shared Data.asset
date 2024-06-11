@@ -71,6 +71,22 @@ MonoBehaviour:
     m_Key: Loading Screen
     m_Metadata:
       m_Items: []
+  - m_Id: 8842539625725952
+    m_Key: Empty Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8846116599480320
+    m_Key: Delete Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8859960180850688
+    m_Key: Confirm button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8860034659106816
+    m_Key: Cancel Button
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
