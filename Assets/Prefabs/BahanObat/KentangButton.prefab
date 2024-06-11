@@ -134,3 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 3556095837913928447, guid: 9bc0028c1c2017d4d900d3b4e8df5fde, type: 3}
+  itemTag: Kentang

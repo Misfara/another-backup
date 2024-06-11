@@ -34,6 +34,7 @@ TagManager:
   - EnemyThreshold4
   - NPC non-quest
   - NPCNonQuest
+  - BawangMerah
   layers:
   - Default
   - TransparentFX

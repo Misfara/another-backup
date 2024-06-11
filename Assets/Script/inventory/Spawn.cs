@@ -8,6 +8,7 @@ public class Spawn : MonoBehaviour
    public GameObject item ;
    Agent agent;
    private Transform player;
+   public string itemTag;
    
    
 
@@ -15,7 +16,7 @@ public class Spawn : MonoBehaviour
    {
     player =GameObject.FindGameObjectWithTag("Player").transform;
     agent = GetComponent<Agent>();
-    gameObject.tag="Potion";
+    gameObject.tag = itemTag;
     
 
    }

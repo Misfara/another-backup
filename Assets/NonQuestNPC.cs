@@ -68,7 +68,9 @@ public class NonQuestNPC : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && playerIsClose )
         {
             StopAllCoroutines();
-            StartCoroutine(JustWait());
+            dialoguePanel.SetActive(false);
+            DoneDialog();
+            
         }
     }
 

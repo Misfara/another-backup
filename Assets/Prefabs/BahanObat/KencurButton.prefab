@@ -89,3 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 4143374823645206719, guid: 23e92da99888c4a44b8bd2f5ec6169df, type: 3}
+  itemTag: Kencur
