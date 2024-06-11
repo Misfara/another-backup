@@ -35,6 +35,7 @@ TagManager:
   - NPC non-quest
   - NPCNonQuest
   - BawangMerah
+  - Enemy5
   layers:
   - Default
   - TransparentFX

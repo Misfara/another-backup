@@ -22,6 +22,8 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
 
     public float wordSpeed;
     public bool playerIsClose;
+    public string itemTag;
+     public int XpReward;
 
     Color defaultColor;
    SpriteRenderer spriteRenderer;
@@ -66,6 +68,7 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
         {
             if (!dialoguePanel.activeInHierarchy && questFinished == false)
             {
+                 StopAllCoroutines();
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
            
@@ -75,13 +78,14 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
             }
             else if (dialogueText.text == dialogue[index])
             {
+                 
                 NextLine();
-             
+
             }
 
             if (!QuestText.activeInHierarchy && questFinished == true)
             {
-               
+                StopAllCoroutines();
             QuestText.SetActive(true);
 
             }
@@ -89,12 +93,14 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
         if (!isTyping){
         if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy&& questFinished == false )
         {
+             StopAllCoroutines();
             StartCoroutine(JustWait());
          
         }
 
          if (Input.GetKeyDown(KeyCode.Q) && QuestText.activeInHierarchy&& questFinished == true)
         {
+             StopAllCoroutines();
              StartCoroutine(QuestDone());
            
            
@@ -110,6 +116,7 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
 
     public void RemoveText()
     {
+        StopAllCoroutines();
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
@@ -137,15 +144,17 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
 
  public IEnumerator QuestDone()
     {
-           if(canPress == true)
+          
             yield return new WaitForSeconds(delay);
             QuestText.SetActive(false);
             
     }
     public void NextLine()
     {
+        StopAllCoroutines();
         if (index < dialogue.Length - 1)
         {
+           
             index++;
             dialogueText.text = "";
             StartCoroutine(Typing());
@@ -167,7 +176,7 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
             animator.speed = 0.5f;
         }
 
-          if (other.CompareTag("Potion") &&!itemQuestTaken)
+          if ( other.gameObject.tag == itemTag &&!itemQuestTaken)
         {
             Destroy(other.gameObject);
             dialoguePanel.SetActive(false);
@@ -207,7 +216,7 @@ public class NPCInteractable : MonoBehaviour, IDataPersistence
 
      private void XPReward(){
       if (questFinished && !xpRewardGiven) {
-        playerExperience.currentXP += 200;
+        playerExperience.currentXP += XpReward;
         xpRewardGiven = true; 
     }
     }

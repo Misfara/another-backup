@@ -1,82 +1,102 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Xml.XPath;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerExperience : MonoBehaviour, IDataPersistence
+public class PlayerExperience : MonoBehaviour
 {
-   Agent agent;
-   Health health;
-   GameObject player;
-   NPCInteractable nPCInteractable;
-   public int maxXP = 0;
-   public int damageValue =1;
-   public int currentXP = 0;
+    Agent agent;
+    Health health;
+    GameObject player;
+    NPCInteractable nPCInteractable;
+    public int maxXP = 0;
+    public int damageValue = 1;
+    public int currentXP = 0;
 
-   bool attackIsUpgraded = false;
+    bool attackIsUpgraded = false;
 
-   bool healthIsUpgraded = false;
+    public GameObject levelUpPanel;
 
-   public GameObject healthPanel;
+    bool healthIsUpgraded = false;
 
-   public Image []attackPowerUI;
-   public GameObject attackPanel;
+    public GameObject healthPanel;
 
-   public int currentLevel =1;
-   bool levelIsUpgraded =false;
+    public Image[] attackPowerUI;
+    public GameObject attackPanel;
 
-   public TextMeshProUGUI levelUI;
-    
- 
+    public int currentLevel = 1;
+    bool levelIsUpgraded = false;
 
-   void Awake()
-   {
-      agent = GetComponent<Agent>(); 
-      nPCInteractable = GetComponent<NPCInteractable>();
-      health = GetComponent<Health>();
-    
-   }
+    public TextMeshProUGUI levelUI;
 
- 
-   public void Update()
-   {
-      Damage();
-   }
-   
-   public int Damage()
-   {
-      if (currentXP >= 100&& attackIsUpgraded == false  && healthIsUpgraded == false && levelIsUpgraded == false)
-      {
-         damageValue =  damageValue + 1 ;
-         health.maxHealth = health.maxHealth + 1;
-         currentLevel = currentLevel +1 ;
-       
-         healthPanel.SetActive(true);
-         attackPanel.SetActive(true);
-         levelIsUpgraded = true;
-         attackIsUpgraded = true;
-         healthIsUpgraded = true;
-         levelUI.text = "2";
-      }
-      return damageValue;
-   }
+    CanvasGroup canvasGroup;
 
-   //Connect to GameData and Data Persistence for saved game health 
-   public void LoadData(GameData data)
-   {
-     this.currentXP = data.currentXP; 
-     this.damageValue = data.damageValue;
-     this.currentLevel = data.currentLevel;
-   }
+    void Awake()
+    {
+        agent = GetComponent<Agent>();
+        nPCInteractable = GetComponent<NPCInteractable>();
+        health = GetComponent<Health>();
+        canvasGroup = levelUpPanel.GetComponent<CanvasGroup>();
+    }
 
-   public void SaveData(ref GameData data)
-   {
-     data.currentXP = this. currentXP;
-     data.damageValue = this.damageValue;
-     data.currentLevel = this.currentLevel;
-   }
+    void Update()
+    {
+        Damage();
+    }
 
+    public int Damage()
+    {
+        if (currentXP >= 100 && levelIsUpgraded== false)
+        {
+            StartCoroutine(LevelUPNotification(2));
+            levelIsUpgraded =true;
+            currentLevel =2;
+        }
+
+        if (currentXP >= 500 && !attackIsUpgraded && !healthIsUpgraded && currentLevel ==2)
+        {
+            StartCoroutine(LevelUPNotification(3));
+            damageValue += 1;
+            health.maxHealth += 1;
+            currentLevel += 1;
+
+            healthPanel.SetActive(true);
+            attackPanel.SetActive(true);
+            levelIsUpgraded = true;
+            attackIsUpgraded = true;
+            healthIsUpgraded = true;
+        }
+        return damageValue;
+    }
+
+    IEnumerator LevelUPNotification(int newLevel)
+    {
+        yield return StartCoroutine(FadeInPanel());
+        levelUI.text = newLevel.ToString();
+        yield return new WaitForSeconds(1.5f);
+        yield return StartCoroutine(FadeOutPanel());
+    }
+
+    private IEnumerator FadeInPanel()
+    {
+        canvasGroup.alpha = 0;
+        levelUpPanel.SetActive(true);
+        while (canvasGroup.alpha < 1)
+        {
+            canvasGroup.alpha += Time.deltaTime / 0.5f;  
+            yield return null;
+        }
+        canvasGroup.alpha = 1;
+    }
+
+    private IEnumerator FadeOutPanel()
+    {
+        while (canvasGroup.alpha > 0)
+        {
+            canvasGroup.alpha -= Time.deltaTime / 0.5f;  
+            yield return null;
+        }
+        canvasGroup.alpha = 0;
+        levelUpPanel.SetActive(false);
+    }
 }
