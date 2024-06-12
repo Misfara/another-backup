@@ -12,12 +12,11 @@ public class GameData
     public int damageValue;
     public int currentLevel;
     public int i;
-    public SerializableDictionary<string, bool> questFinished; 
+    public bool questFinished; 
     // public SerializableDictionary<string, bool> isFull;
 
     public Vector3 playerPosition;
     // public SerializableDictionary<string, bool> itemButton;
-    public string textBox;
 
     //the values defined in this constructor will be the default values
     //the game starts with when there's no data to load
@@ -29,10 +28,10 @@ public class GameData
         this.damageValue = 1;
         this.currentLevel = 1;
         this.i = 0;
-        questFinished = new SerializableDictionary<string, bool>();
+        this.questFinished = false;
         // isFull = new SerializableDictionary<string, bool>();
-        playerPosition = Vector3.zero;
+        playerPosition = new Vector3(-586.35f, -183f, 0f);
+        // playerPosition = Vector3.zero;
         // itemButton = new SerializableDictionary<string, bool>();
-        this.textBox = "";
     }
 }

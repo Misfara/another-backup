@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerKnockback : MonoBehaviour//, IDataPersistence
+public class PlayerKnockback : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private Rigidbody2D rb;
 
@@ -26,15 +26,15 @@ public class PlayerKnockback : MonoBehaviour//, IDataPersistence
     }
     
     // connect to GameData and Data Persistence for save the player's last position 
-    // public void LoadData(GameData data)
-    // {
-    //     this.transform.position = data.playerPosition;
-    // }
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
 
-    // public void SaveData(ref GameData data)
-    // {
-    //     data.playerPosition = this.transform.position;
-    // }
+    public void SaveData(GameData data)
+    {
+        data.playerPosition = this.transform.position;
+    }
 
     public void PlayFeedback(GameObject sender)
     {

@@ -38,6 +38,26 @@ MonoBehaviour:
     m_Localized: Quit
     m_Metadata:
       m_Items: []
+  - m_Id: 8980247819960320
+    m_Localized: All prayer has been fulfilled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8981021287366656
+    m_Localized: Level up !!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8982614527295488
+    m_Localized: YOU LOSE!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8982881763180544
+    m_Localized: Retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8984107695325184
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

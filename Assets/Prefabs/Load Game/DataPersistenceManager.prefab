@@ -50,4 +50,4 @@ MonoBehaviour:
   testSelectedProfileId: test
   fileName: tabib.BackUp
   useEncryption: 1
-  autoSaveTimeSeconds: 60
+  autoSaveTimeSeconds: 10

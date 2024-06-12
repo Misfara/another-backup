@@ -38,6 +38,26 @@ MonoBehaviour:
     m_Localized: Keluar
     m_Metadata:
       m_Items: []
+  - m_Id: 8980247819960320
+    m_Localized: Semua doa telah terkabul
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8981021287366656
+    m_Localized: Naik tingkat !!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8982614527295488
+    m_Localized: KAMU KALAH!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8982881763180544
+    m_Localized: Coba lagi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8984107695325184
+    m_Localized: Halaman Utama
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

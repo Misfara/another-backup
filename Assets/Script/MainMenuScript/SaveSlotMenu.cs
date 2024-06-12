@@ -29,12 +29,16 @@ public class SaveSlotMenu : MonoBehaviour
         //disable all buttons
         DisableMenuButtons();
 
+        AudioManager.Instance.PlaySFX("Button");
+
         //case - Loading game
         if (isLoadingGame)
         {
             LoadingScreen.SetActive(true);
             DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
             SaveGameAndLoadScene();
+            AudioManager.Instance.musicSource.Stop();
+            AudioManager.Instance.PlayMusic("Game");
         }
         //case - new game, but the save slot has data
         else if (saveSlot.hasData)
@@ -47,6 +51,8 @@ public class SaveSlotMenu : MonoBehaviour
                     LoadingScreen.SetActive(true);
                     DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
                     DataPersistenceManager.instance.NewGame();
+                    AudioManager.Instance.musicSource.Stop();
+                    AudioManager.Instance.PlayMusic("Game");
                     SaveGameAndLoadScene();
                 },
                 //function to execute if we select 'cancel'
@@ -62,6 +68,8 @@ public class SaveSlotMenu : MonoBehaviour
             LoadingScreen.SetActive(true);
             DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
             DataPersistenceManager.instance.NewGame();
+            AudioManager.Instance.musicSource.Stop();
+            AudioManager.Instance.PlayMusic("Game");
             SaveGameAndLoadScene();
         }
     }
@@ -77,18 +85,21 @@ public class SaveSlotMenu : MonoBehaviour
     public void OnClearClicked(SaveSlot saveSlot)
     {
         DisableMenuButtons();
+        AudioManager.Instance.PlaySFX("Button");
 
         confirmationPopUpMenu.ActivateMenu(
             "Are you sure you want to delete this saved data?",
             //function to execute if we select 'yes'
             () =>
             {
+                AudioManager.Instance.PlaySFX("Button");
                 DataPersistenceManager.instance.DeleteProfileData(saveSlot.GetProfileId());
                 ActivateMenu(isLoadingGame);
             },
             //function to execute if we select 'cancel'
             () =>
             {
+                AudioManager.Instance.PlaySFX("Button");
                 ActivateMenu(isLoadingGame);
             }
         );
@@ -96,6 +107,7 @@ public class SaveSlotMenu : MonoBehaviour
 
     public void onBackClicked()
     {
+        AudioManager.Instance.PlaySFX("Button");
         startScreen.ActivateMenu();
         this.DeactivateMenu();
     }

@@ -43,6 +43,32 @@ MonoBehaviour:
     m_Key: NPC 05 Mission
     m_Metadata:
       m_Items: []
+  - m_Id: 3275353368674304
+    m_Key: NPC Gerbang 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276098176401408
+    m_Key: NPC Gerbang 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276432047194112
+    m_Key: NPC Gerbang Finally
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3278721113767936
+    m_Key: 'Heksa 1
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3279067429060608
+    m_Key: Heksa 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3279408669245440
+    m_Key: Daria
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

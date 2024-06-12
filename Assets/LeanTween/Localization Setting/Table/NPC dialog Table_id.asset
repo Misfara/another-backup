@@ -53,6 +53,32 @@ MonoBehaviour:
       yang menekan.
     m_Metadata:
       m_Items: []
+  - m_Id: 3275353368674304
+    m_Localized: tunggu sebentar. menurutmu kemana kamu akan pergi sobat?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276098176401408
+    m_Localized: pergi bantu orang-orang seperti yang ditugaskan padamu!!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276432047194112
+    m_Localized: Sepertinya Anda telah menjadi dokter yang baik, Anda dapat melanjutkan
+      perjalanan Anda.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3278721113767936
+    m_Localized: Tidak ada tempat yang lebih baik untuk menikmati waktu luang Anda
+      selain di sini!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3279067429060608
+    m_Localized: Andai saja saat-saat seperti ini berlangsung selamanya...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3279408669245440
+    m_Localized: Aku ingin tahu apakah ayah bangga padaku sekarang...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

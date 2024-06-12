@@ -12,7 +12,7 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
 
-      public GameObject QuestText;
+    public GameObject QuestText;
     [SerializeField] Transform Player;
     [SerializeField] Transform thisNPC;
     PlayerInteraction playerInteraction;
@@ -23,21 +23,21 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
     public float wordSpeed;
     public bool playerIsClose;
     public string itemTag;
-     public int XpReward;
+    public int XpReward;
 
     Color defaultColor;
-   SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer;
 
-   Animator animator;
-   public float delay = 0.25f;
+    Animator animator;
+    public float delay = 0.25f;
 
-   public bool questFinished;
+    public bool questFinished;
     private bool xpRewardGiven = false;
     private bool itemQuestTaken = false;
     public bool canPress = false; 
-   public bool isTyping = false;
+    public bool isTyping = false;
 
-   PlayerExperience playerExperience;
+    PlayerExperience playerExperience;
 
 
     void Start()
@@ -47,19 +47,25 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
         animator = GetComponent<Animator>();
-         playerExperience = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerExperience>();
-          playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
+        playerExperience = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerExperience>();
+        playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
     }
 
-    //   public void LoadData(GameData data)
-    // {
-    //     this.questFinished = data.questFinished;
-    // }
+      public void LoadData(GameData data)
+    {
+        if (questFinished == true)
+        {
+            this.questFinished = data.questFinished;
+        }
+    }
 
-    // public void SaveData(GameData data)
-    // {
-    //     data.questFinished = this. questFinished;
-    // }
+    public void SaveData(GameData data)
+    {
+        if (questFinished = true)
+        {
+            data.questFinished = this. questFinished;
+        }
+    }
 
     // Update is called once per frame
     public void Update()
@@ -90,21 +96,20 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
 
             }
         }
-        if (!isTyping){
-        if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy&& questFinished == false )
+        if (!isTyping)
         {
-             StopAllCoroutines();
-            StartCoroutine(JustWait());
+            if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy&& questFinished == false )
+            {
+                StopAllCoroutines();
+                StartCoroutine(JustWait());
          
-        }
+            }
 
-         if (Input.GetKeyDown(KeyCode.Q) && QuestText.activeInHierarchy&& questFinished == true)
-        {
-             StopAllCoroutines();
-             StartCoroutine(QuestDone());
-           
-           
-        }
+            if (Input.GetKeyDown(KeyCode.Q) && QuestText.activeInHierarchy&& questFinished == true)
+            {
+                StopAllCoroutines();
+                StartCoroutine(QuestDone());
+            }
         }
 
         XPReward();
@@ -132,23 +137,24 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
             canPress = true;
         
         }
-         isTyping = false;
+        isTyping = false;
     }
 
     public IEnumerator JustWait()
     {
-          if(canPress == true) 
-           yield return new WaitForSeconds(delay);
-            RemoveText();
+        if(canPress == true) 
+        yield return new WaitForSeconds(delay);
+        RemoveText();
     }
 
- public IEnumerator QuestDone()
+    public IEnumerator QuestDone()
     {
           
-            yield return new WaitForSeconds(delay);
-            QuestText.SetActive(false);
+        yield return new WaitForSeconds(delay);
+        QuestText.SetActive(false);
             
     }
+
     public void NextLine()
     {
         StopAllCoroutines();
@@ -176,7 +182,7 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
             animator.speed = 0.5f;
         }
 
-          if ( other.gameObject.tag == itemTag &&!itemQuestTaken)
+        if ( other.gameObject.tag == itemTag &&!itemQuestTaken)
         {
             Destroy(other.gameObject);
             dialoguePanel.SetActive(false);
@@ -188,19 +194,19 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
  
     }
 
-    private void OnTriggerStay2D(Collider2D other){
-        if (other.CompareTag("Player")){
-                if(Player.position.x  > thisNPC.position.x ){
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if(Player.position.x  > thisNPC.position.x )
+            {
                 spriteRenderer.flipX = false;
-             }
-                if(Player.position.x  < thisNPC.position.x ){
+            }
+            if(Player.position.x  < thisNPC.position.x )
+            {
                 spriteRenderer.flipX = enabled;
-             }
-        }
-
-      
-
-        
+            }
+        }  
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -214,11 +220,13 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
         }
     }
 
-     private void XPReward(){
-      if (questFinished && !xpRewardGiven) {
-        playerExperience.currentXP += XpReward;
-        xpRewardGiven = true; 
-    }
+    private void XPReward()
+    {
+        if (questFinished && !xpRewardGiven)
+        {
+            playerExperience.currentXP += XpReward;
+            xpRewardGiven = true; 
+        }
     }
 
 

@@ -35,6 +35,26 @@ MonoBehaviour:
     m_Key: Quit
     m_Metadata:
       m_Items: []
+  - m_Id: 8980247819960320
+    m_Key: Healing Notification
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8981021287366656
+    m_Key: level up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8982614527295488
+    m_Key: Died Message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8982881763180544
+    m_Key: Retry Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8984107695325184
+    m_Key: Main Menu Button
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
