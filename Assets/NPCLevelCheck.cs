@@ -64,6 +64,13 @@ public class NPCLevelCheck : MonoBehaviour
             {
                 NextLine();
             }
+
+        if (Input.GetKeyDown(KeyCode.E) && lvlEnoughPanel.activeInHierarchy)
+            {
+                StopAllCoroutines();
+                lvlEnoughPanel.SetActive(false);
+                 DoneDialog();
+            }
        
         // Ensure Q key only works if not typing
         if (Input.GetKeyDown(KeyCode.Q) && playerIsClose &&dialoguePanel.activeInHierarchy)
@@ -139,6 +146,8 @@ public class NPCLevelCheck : MonoBehaviour
             {
                 lvlEnoughPanel.SetActive(true);
                 boxCollider2D.SetActive(false);
+                StartCoroutine(Typing());
+                OnDialog();
             }
         }
     }
