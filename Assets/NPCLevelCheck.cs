@@ -39,6 +39,8 @@ public class NPCLevelCheck : MonoBehaviour
 
     public UnityEvent OnBegin, OnDone;
 
+    bool alreadyTriggered = false;
+
     void Start()
     {
         dialogueText.text = "";
@@ -142,12 +144,13 @@ public class NPCLevelCheck : MonoBehaviour
                 OnDialog();
             }
 
-            if(!dialoguePanel.activeInHierarchy && playerExperience.currentXP >= 500)
+            if(!dialoguePanel.activeInHierarchy && playerExperience.currentXP >= 500 && alreadyTriggered == false)
             {
                 lvlEnoughPanel.SetActive(true);
                 boxCollider2D.SetActive(false);
                 StartCoroutine(Typing());
                 OnDialog();
+                alreadyTriggered = true;
             }
         }
     }

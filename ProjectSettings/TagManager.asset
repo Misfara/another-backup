@@ -36,6 +36,10 @@ TagManager:
   - NPCNonQuest
   - BawangMerah
   - Enemy5
+  - Enemy6
+  - Enemy7
+  - Enemy8
+  - Enemy9
   layers:
   - Default
   - TransparentFX
