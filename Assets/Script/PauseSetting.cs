@@ -18,6 +18,9 @@ public class PauseSetting : MonoBehaviour
     [SerializeField] float tweenDuration;
     [SerializeField] CanvasGroup canvasGroup; //Dark panel canvas group
 
+    private SaveSlotMenu saveSlotMenu;
+    private SaveSlot[] saveSlots;
+
     public void PauseButton()
     {
         PausePanelIntro();
@@ -55,13 +58,6 @@ public class PauseSetting : MonoBehaviour
         SceneManager.LoadScene("StartScreen");
         AudioManager.Instance.musicSource.Stop();
         AudioManager.Instance.PlayMusic("Theme");
-        AudioManager.Instance.PlaySFX("Button");
-    }
-
-    public void RetryGame()
-    {
-        SceneManager.LoadScene("SampleScene");
-        AudioManager.Instance.PlayMusic("Game");
         AudioManager.Instance.PlaySFX("Button");
     }
 

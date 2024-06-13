@@ -33,7 +33,14 @@ public class PlayerKnockback : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        data.playerPosition = this.transform.position;
+        if (this != null)
+        {
+            data.playerPosition = this.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerKnockback object is null.");
+        }
     }
 
     public void PlayFeedback(GameObject sender)

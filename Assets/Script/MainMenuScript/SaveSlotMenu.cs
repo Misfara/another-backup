@@ -9,11 +9,13 @@ public class SaveSlotMenu : MonoBehaviour
     [SerializeField] private StartScreen startScreen;
     [SerializeField] private GameObject LoadingScreen;
     private SaveSlot[] saveSlots;
+    private Health health;
 
     private bool isLoadingGame = false;
 
     [Header("Menu Buttons")]
     [SerializeField] private Button backButton;
+    [SerializeField] private Button retryButton;
 
     [Header("Confirmation PopUp")]
     [SerializeField] private ConfimationPopUpMenu confirmationPopUpMenu;
@@ -62,6 +64,16 @@ public class SaveSlotMenu : MonoBehaviour
                 }
             );
         }
+        // //case - if player lose, this button can make a new data
+        // else if (retryButton.interactable = true)
+        // {
+        //     LoadingScreen.SetActive(true);
+        //     DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
+        //     DataPersistenceManager.instance.NewGame();
+        //     AudioManager.Instance.musicSource.Stop();
+        //     AudioManager.Instance.PlayMusic("Game");
+        //     SaveGameAndLoadScene();
+        // }
         //case - new game, and the save slot has no data
         else
         {
