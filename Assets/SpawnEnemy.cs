@@ -26,6 +26,7 @@ public class SpawnEnemy : MonoBehaviour
         [SerializeField]public EnemyArea7 enemyArea7;
         [SerializeField]public EnemyArea8 enemyArea8;
          [SerializeField]public EnemyArea9 enemyArea9;
+          [SerializeField]public EnemyArea10 enemyArea10;
     [SerializeField] public GameObject thisGameObject;
 
     Rigidbody2D rb;
@@ -102,6 +103,13 @@ public class SpawnEnemy : MonoBehaviour
         {
             StartCoroutine( Fade9());
         }
+
+        if (!isFading && enemyArea10!= null)
+        {
+            StartCoroutine( Fade10());
+        }
+
+         
     }
 
     public IEnumerator Fade()
@@ -483,6 +491,50 @@ public IEnumerator Fade2(){
 
         
     }
+
+    public IEnumerator Fade10(){
+
+    float distance = Vector2.Distance(player.position, transform.position);
+        float wait = 0.3f;
+        if (distance > enemyArea10.Detector && !isFading && !isChangingPosition && doneFading ==false &&enemyArea10 != null  )
+        {
+            isFading = true;
+            doneFading =false;
+            OnMovementInput?.Invoke(Vector2.zero);
+            yield return new WaitForSeconds(wait);
+            animator.SetBool("FadeOut", true);
+            weaponAnimator.SetBool("Fading", true);
+            yield return new WaitForSeconds(wait);
+            OnFadeOut?.Invoke();
+
+            // Change position for each enemy in the array
+            enemyArea10.ChangeEnemyPositionRandomly();
+             yield return new WaitForSeconds(2);
+            doneFading = true;
+            isFading = false;
+            isChangingPosition = true;
+        }
+
+        if (distance < enemyArea10.Detector && !isFading && isChangingPosition && doneFading ==true && enemyArea10!= null )
+        {
+            wait = 0f;
+            isFading = true;
+            doneFading = true;
+            animator.SetBool("FadeOut", false);
+            weaponAnimator.SetBool("Fading", false);
+            weaponAnimator.SetTrigger("Iddling");
+            yield return new WaitForSeconds(wait);
+            OnFadeIn?.Invoke();
+            isFading = false;
+            isChangingPosition = false;
+            doneFading =false;
+        }
+
+        
+    }
+
+    
+     
     
     
 }

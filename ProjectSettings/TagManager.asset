@@ -40,6 +40,11 @@ TagManager:
   - Enemy7
   - Enemy8
   - Enemy9
+  - Enemy10
+  - Ambush
+  - Mint
+  - Lemon
+  - Madu
   layers:
   - Default
   - TransparentFX
