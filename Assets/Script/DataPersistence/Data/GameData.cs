@@ -13,7 +13,7 @@ public class GameData
     public int currentLevel;
     public int i;
     public bool questFinished; 
-    // public SerializableDictionary<string, bool> isFull;
+    // public SerializableDictionary<string, bool> questFinished;
 
     public Vector3 playerPosition;
     // public SerializableDictionary<string, bool> itemButton;
@@ -28,9 +28,10 @@ public class GameData
         this.damageValue = 1;
         this.currentLevel = 1;
         this.i = 0;
-        this.questFinished = false;
-        // isFull = new SerializableDictionary<string, bool>();
-        playerPosition = new Vector3(-586.35f, -183f, 0f);
+        // this.questFinished = questFinished;
+         
+        questFinished = true;
+        playerPosition = new Vector3(-639.1f, -127.5f, 0f);
         // playerPosition = Vector3.zero;
         // itemButton = new SerializableDictionary<string, bool>();
     }

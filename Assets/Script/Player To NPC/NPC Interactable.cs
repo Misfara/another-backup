@@ -8,6 +8,13 @@ using System;
 
 public class NPCInteractable : MonoBehaviour//, IDataPersistence
 {
+    // [SerializeField] private string id;
+
+    // [ContextMenu("Generate guid for id")]
+    // private void GenerateGuid()
+    // {
+    //     id = System.Guid.NewGuid().ToString();
+    // }
     
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
@@ -51,21 +58,36 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
         playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
     }
 
-      public void LoadData(GameData data)
-    {
-        if (questFinished == true)
-        {
-            this.questFinished = data.questFinished;
-        }
-    }
+    // public void LoadData(GameData data)
+    // {
+    //     data.questFinished.TryGetValue(id, out itemQuestTaken);
+    //     if (itemQuestTaken)
+    //     {
+    //         thisNPC.gameObject.SetActive(false);
+    //     }
+    // }
 
-    public void SaveData(GameData data)
-    {
-        if (questFinished = true)
-        {
-            data.questFinished = this. questFinished;
-        }
-    }
+    // public void SaveData(GameData data)
+    // {
+    //     if (data.questFinished.ContainsKey(id))
+    //     {
+    //         data.questFinished.Remove(id);
+    //     }
+    //     data.questFinished.Add(id, !itemQuestTaken);
+    // }
+
+    //   public void LoadData(GameData data)
+    // {   
+    //     this.questFinished = data.questFinished;   
+    // }
+
+    // public void SaveData(GameData data)
+    // {
+    //     if (gameObject.tag == itemTag && id == this.id && itemQuestTaken == true)
+    //     {
+    //         data.questFinished = this.questFinished;
+    //     }
+    // }
 
     // Update is called once per frame
     public void Update()
@@ -189,7 +211,6 @@ public class NPCInteractable : MonoBehaviour//, IDataPersistence
             QuestText.SetActive(true);
             questFinished = true;
             itemQuestTaken = true;
-          
         }
  
     }

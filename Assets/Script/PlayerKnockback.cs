@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class PlayerKnockback : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private Rigidbody2D rb;
-
     Health health;
 
     BegalHealth begalHealth;
@@ -33,7 +32,7 @@ public class PlayerKnockback : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        if (this != null)
+        if (this != null && health.currentHealth != 0)
         {
             data.playerPosition = this.transform.position;
         }

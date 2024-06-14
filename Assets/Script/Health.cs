@@ -54,7 +54,14 @@ public class Health : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        data.currentHealth = this. currentHealth;
+        if (currentHealth != 0)
+        {
+            data.currentHealth = this. currentHealth;
+        }
+        else
+        {
+            currentHealth = 2;
+        }
     }
 
     public void InitializeHealth(int healthValue)

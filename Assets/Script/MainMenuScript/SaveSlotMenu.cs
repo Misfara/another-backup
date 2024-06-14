@@ -64,17 +64,12 @@ public class SaveSlotMenu : MonoBehaviour
                 }
             );
         }
-        // //case - if player lose, this button can make a new data
-        // else if (retryButton.interactable = true)
+        // //case - if player lose, Game Data should be deleted
+        // else if (health.isDead == true)
         // {
-        //     LoadingScreen.SetActive(true);
-        //     DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
-        //     DataPersistenceManager.instance.NewGame();
-        //     AudioManager.Instance.musicSource.Stop();
-        //     AudioManager.Instance.PlayMusic("Game");
-        //     SaveGameAndLoadScene();
+        //     DataPersistenceManager.instance.DeleteProfileData(saveSlot.GetProfileId());
         // }
-        //case - new game, and the save slot has no data
+        // case - new game, and the save slot has no data
         else
         {
             LoadingScreen.SetActive(true);

@@ -110,8 +110,17 @@ public class PlayerExperience : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        data.currentXP = this. currentXP;
-        data.damageValue = this.damageValue;
-        data.currentLevel = this.currentLevel;
+        if (health.currentHealth != 0)
+        {
+            data.currentXP = this. currentXP;
+            data.damageValue = this.damageValue;
+            data.currentLevel = this.currentLevel;
+        }
+        else
+        {
+            currentXP = 0;
+            currentLevel = 1;
+            damageValue = 1;
+        }
     }
 }
